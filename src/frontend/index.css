@@ -1,0 +1,135 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Font Faces ───────────────────────────────────────────────── */
+@font-face {
+  font-family: "Fraunces";
+  src: url("/assets/fonts/Fraunces.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "General Sans";
+  src: url("/assets/fonts/GeneralSans.woff2") format("woff2");
+  font-weight: 200 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ─── Design Tokens ────────────────────────────────────────────── */
+@layer base {
+  :root {
+    --radius: 0.5rem;
+
+    /* Warm off-white background — paper feel */
+    --background: 0.975 0.006 85;
+    --foreground: 0.18 0.025 255;
+
+    /* Cards — slightly brighter cream */
+    --card: 0.99 0.004 80;
+    --card-foreground: 0.18 0.025 255;
+
+    /* Popover */
+    --popover: 0.995 0.003 80;
+    --popover-foreground: 0.18 0.025 255;
+
+    /* Primary — deep navy */
+    --primary: 0.22 0.06 258;
+    --primary-foreground: 0.98 0 0;
+
+    /* Secondary — soft sand */
+    --secondary: 0.94 0.01 75;
+    --secondary-foreground: 0.25 0.04 255;
+
+    /* Muted */
+    --muted: 0.94 0.008 80;
+    --muted-foreground: 0.52 0.02 255;
+
+    /* Accent — amber-gold */
+    --accent: 0.78 0.12 65;
+    --accent-foreground: 0.12 0.04 255;
+
+    /* Destructive */
+    --destructive: 0.577 0.245 27.325;
+    --destructive-foreground: 0.985 0 0;
+
+    /* Borders */
+    --border: 0.87 0.01 80;
+    --input: 0.88 0.012 80;
+    --ring: 0.22 0.06 258;
+
+    /* Charts */
+    --chart-1: 0.78 0.12 65;
+    --chart-2: 0.55 0.18 258;
+    --chart-3: 0.65 0.14 165;
+    --chart-4: 0.7 0.16 30;
+    --chart-5: 0.6 0.15 300;
+
+    /* Sidebar */
+    --sidebar: 0.22 0.06 258;
+    --sidebar-foreground: 0.95 0.008 80;
+    --sidebar-primary: 0.78 0.12 65;
+    --sidebar-primary-foreground: 0.12 0.04 255;
+    --sidebar-accent: 0.3 0.07 258;
+    --sidebar-accent-foreground: 0.95 0.008 80;
+    --sidebar-border: 0.32 0.05 258;
+    --sidebar-ring: 0.78 0.12 65;
+
+    /* Custom tokens */
+    --navy: 0.22 0.06 258;
+    --amber: 0.78 0.12 65;
+    --cream: 0.975 0.006 85;
+    --paper: 0.965 0.008 78;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display;
+  }
+}
+
+/* ─── Custom Utilities ─────────────────────────────────────────── */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .doc-card-hover {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .doc-card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px oklch(0.18 0.025 255 / 0.12);
+  }
+
+  .upload-zone {
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 8px,
+      oklch(0.87 0.01 80 / 0.5) 8px,
+      oklch(0.87 0.01 80 / 0.5) 9px
+    );
+  }
+
+  .upload-zone-active {
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 8px,
+      oklch(0.78 0.12 65 / 0.25) 8px,
+      oklch(0.78 0.12 65 / 0.25) 9px
+    );
+  }
+}
