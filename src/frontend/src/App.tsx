@@ -5,6 +5,7 @@ import {
   createRoute,
   createRouter,
 } from "@tanstack/react-router";
+import CarRacingGame from "./Game";
 import { DocumentDetailPage } from "./pages/DocumentDetailPage";
 import { HomePage } from "./pages/HomePage";
 
@@ -33,7 +34,13 @@ const documentRoute = createRoute({
   },
 });
 
-const routeTree = rootRoute.addChildren([indexRoute, documentRoute]);
+const gameRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/game",
+  component: CarRacingGame,
+});
+
+const routeTree = rootRoute.addChildren([indexRoute, documentRoute, gameRoute]);
 
 const router = createRouter({ routeTree });
 

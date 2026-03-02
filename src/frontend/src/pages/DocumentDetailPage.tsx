@@ -45,8 +45,8 @@ function DocumentMetaTags({
   doc,
 }: { doc: { title: string; description: string } }) {
   useMetaTags({
-    title: `${doc.title} — Public Document Library`,
-    description: doc.description || `View and download: ${doc.title}`,
+    title: `${doc.title} — Rana Document`,
+    description: doc.description || `Dekho aur download karo: ${doc.title}`,
     ogType: "article",
   });
   return null;
@@ -54,8 +54,9 @@ function DocumentMetaTags({
 
 function DefaultMetaTags() {
   useMetaTags({
-    title: "Document — Public Document Library",
-    description: "View and download this document from the public library.",
+    title: "Document — Rana Document",
+    description:
+      "Is document ko Rana Document library se dekho aur download karo.",
   });
   return null;
 }
@@ -326,7 +327,7 @@ function PageShell({ children }: { children: React.ReactNode }) {
               <Library className="w-4 h-4 text-primary-foreground" />
             </div>
             <span className="font-display font-bold text-lg text-foreground hidden sm:block">
-              DocLibrary
+              Rana Document
             </span>
           </a>
         </div>
@@ -337,7 +338,7 @@ function PageShell({ children }: { children: React.ReactNode }) {
       <footer className="border-t border-border bg-card mt-auto">
         <div className="container mx-auto px-4 py-6 text-center">
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()}. Built with ❤️ using{" "}
+            © {new Date().getFullYear()} Rana Document. Built with ❤️ using{" "}
             <a
               href={`https://caffeine.ai?utm_source=caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(window.location.hostname)}`}
               target="_blank"

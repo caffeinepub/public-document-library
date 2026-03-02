@@ -23,10 +23,10 @@ export function HomePage() {
   const searchRef = useRef<HTMLInputElement>(null);
 
   useMetaTags({
-    title: "Public Document Library — Sharable Documents for Everyone",
+    title: "Rana Document — Public Document Library",
     description:
-      "A free public document repository. Upload and share government documents, educational resources, reports, and more. Accessible to everyone.",
-    ogImage: "/assets/generated/hero-document-library.dim_1600x500.jpg",
+      "Rana Document: Apne saare documents yahan upload karein aur duniya ke saath share karein. Government records, certificates, reports aur bahut kuch.",
+    ogImage: "/assets/generated/rana-document-hero.dim_1600x500.jpg",
   });
 
   // Debounce search
@@ -57,7 +57,7 @@ export function HomePage() {
                 <Library className="w-4 h-4 text-primary-foreground" />
               </div>
               <span className="font-display font-bold text-lg text-foreground hidden sm:block">
-                DocLibrary
+                Rana Document
               </span>
             </a>
 
@@ -76,13 +76,13 @@ export function HomePage() {
           {/* ── Hero Section ── */}
           <section className="relative overflow-hidden bg-card border-b border-border">
             <div
-              className="absolute inset-0 bg-cover bg-center opacity-10"
+              className="absolute inset-0 bg-cover bg-center opacity-20"
               style={{
                 backgroundImage:
-                  "url('/assets/generated/hero-document-library.dim_1600x500.jpg')",
+                  "url('/assets/generated/rana-document-hero.dim_1600x500.jpg')",
               }}
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-background/0 via-background/20 to-background/60" />
+            <div className="absolute inset-0 bg-gradient-to-b from-background/0 via-background/20 to-background/80" />
 
             <div className="relative container mx-auto px-4 py-14 md:py-20 text-center">
               <motion.div
@@ -96,15 +96,15 @@ export function HomePage() {
                 </div>
 
                 <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight text-balance mb-4">
-                  Share Documents{" "}
+                  Rana{" "}
                   <span className="text-accent-foreground relative">
-                    with the World
+                    Document
                   </span>
                 </h1>
                 <p className="text-muted-foreground text-lg max-w-xl mx-auto mb-8 text-balance">
-                  Upload your documents — government records, certificates,
-                  reports, or anything else — and make them publicly accessible
-                  for everyone to find and download.
+                  Apne documents — government records, certificates, reports, ya
+                  koi bhi file — yahan upload karein aur sabke liye publicly
+                  accessible banayein.
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
@@ -114,7 +114,7 @@ export function HomePage() {
                     className="bg-primary text-primary-foreground hover:bg-primary/90 gap-2 px-6"
                   >
                     <Upload className="w-4 h-4" />
-                    Upload Document
+                    Document Upload Karein
                   </Button>
                   <Button
                     variant="outline"
@@ -123,7 +123,7 @@ export function HomePage() {
                     className="gap-2 px-6"
                   >
                     <Search className="w-4 h-4" />
-                    Browse Library
+                    Browse Karein
                     <ArrowRight className="w-4 h-4" />
                   </Button>
                 </div>
@@ -142,7 +142,7 @@ export function HomePage() {
                   type="search"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search documents by title or description..."
+                  placeholder="Title ya description se documents dhundein..."
                   className="pl-10 pr-10 h-11 text-base"
                   aria-label="Search documents"
                 />
@@ -163,17 +163,18 @@ export function HomePage() {
             <div className="flex items-center justify-between mb-5">
               <div className="text-sm text-muted-foreground">
                 {isLoading ? (
-                  <span>Loading documents...</span>
+                  <span>Documents load ho rahe hain...</span>
                 ) : searchQuery ? (
                   <span>
                     <strong className="text-foreground">{docCount}</strong>{" "}
-                    result{docCount !== 1 ? "s" : ""} for{" "}
-                    <strong className="text-foreground">"{searchQuery}"</strong>
+                    result{docCount !== 1 ? "s" : ""} mila "{searchQuery}" ke
+                    liye
                   </span>
                 ) : (
                   <span>
+                    Library mein{" "}
                     <strong className="text-foreground">{docCount}</strong>{" "}
-                    document{docCount !== 1 ? "s" : ""} in the library
+                    document{docCount !== 1 ? "s" : ""} hain
                   </span>
                 )}
               </div>
@@ -193,10 +194,10 @@ export function HomePage() {
               <div className="text-center py-16">
                 <div className="text-4xl mb-4">⚠️</div>
                 <h3 className="font-display text-lg font-semibold mb-2">
-                  Could not load documents
+                  Documents load nahi ho sake
                 </h3>
                 <p className="text-muted-foreground text-sm">
-                  Please check your connection and try again.
+                  Apna connection check karein aur dobara try karein.
                 </p>
               </div>
             )}
@@ -213,27 +214,28 @@ export function HomePage() {
                     <>
                       <FileText className="w-12 h-12 mx-auto mb-4 text-muted-foreground/40" />
                       <h3 className="font-display text-lg font-semibold mb-2">
-                        No results found
+                        Koi result nahi mila
                       </h3>
                       <p className="text-muted-foreground text-sm mb-4">
-                        Try different keywords or browse all documents
+                        Alag keywords try karein ya saare documents browse
+                        karein
                       </p>
                       <Button
                         variant="outline"
                         size="sm"
                         onClick={() => setSearchQuery("")}
                       >
-                        Clear search
+                        Search clear karein
                       </Button>
                     </>
                   ) : (
                     <>
                       <Library className="w-12 h-12 mx-auto mb-4 text-muted-foreground/40" />
                       <h3 className="font-display text-lg font-semibold mb-2">
-                        Library is empty
+                        Library abhi khaali hai
                       </h3>
                       <p className="text-muted-foreground text-sm mb-4">
-                        Be the first to upload a document!
+                        Pehla document upload karein!
                       </p>
                       <Button
                         onClick={() => setUploadOpen(true)}
@@ -241,7 +243,7 @@ export function HomePage() {
                         className="bg-primary text-primary-foreground"
                       >
                         <Upload className="w-4 h-4 mr-2" />
-                        Upload First Document
+                        Pehla Document Upload Karein
                       </Button>
                     </>
                   )}
@@ -271,7 +273,7 @@ export function HomePage() {
         <footer className="border-t border-border bg-card mt-auto">
           <div className="container mx-auto px-4 py-6 text-center">
             <p className="text-xs text-muted-foreground">
-              © {new Date().getFullYear()}. Built with ❤️ using{" "}
+              © {new Date().getFullYear()} Rana Document. Built with ❤️ using{" "}
               <a
                 href={`https://caffeine.ai?utm_source=caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(window.location.hostname)}`}
                 target="_blank"

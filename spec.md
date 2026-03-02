@@ -1,33 +1,39 @@
-# Public Document Library
+# Car Racing Game
 
 ## Current State
-Naya project hai, koi existing code nahi hai.
+New project. No existing code.
 
 ## Requested Changes (Diff)
 
 ### Add
-- Ek public document repository website jaha koi bhi documents upload kar sake
-- Documents publicly visible honge - koi bhi bina login ke dekh sake
-- File upload feature: PDF, Word, images, aur other documents support
-- Document listing page - saare uploaded documents grid/list view mein
-- Document details page - file ka naam, description, upload date dikhaye
-- Direct document download/view link
-- Search functionality taaki log documents dhundh sake
-- SEO-friendly pages taaki Google par search ho sake
+- 2D car racing game using Canvas API
+- Player controls their car using arrow keys or WASD
+- Multiple AI opponent cars on a scrolling road
+- Score/distance tracking as the game progresses
+- Speed increases over time for difficulty progression
+- Lives/health system (3 lives)
+- Game over screen with final score and restart option
+- Leaderboard to save high scores on the backend
+- Start screen with game title and instructions
+- Road with lane markings that scroll downward to simulate movement
+- Player car can move left/right to avoid obstacles and opponents
+- Sound effects via Web Audio API (optional)
 
 ### Modify
-- Kuch nahi (naya project)
+- Nothing (new project)
 
 ### Remove
-- Kuch nahi (naya project)
+- Nothing (new project)
 
 ## Implementation Plan
-1. Blob storage component select karna file uploads ke liye
-2. Backend mein document metadata store karne ke liye APIs banani: upload, list, get, delete
-3. Frontend mein:
-   - Home page with document grid listing
-   - Upload page/modal with title, description, file picker
-   - Document detail/preview page
-   - Search bar
-   - SEO meta tags (title, description, Open Graph)
-4. Public access - koi login required nahi viewing ke liye
+1. Backend: Store high scores with player name and score
+2. Frontend: Canvas-based 2D racing game
+   - Scrolling road with lane markings
+   - Player car (keyboard controlled: arrow keys / WASD)
+   - AI opponent cars coming from top
+   - Collision detection
+   - Score display (distance traveled)
+   - Speed progression
+   - 3 lives system
+   - Game states: start, playing, game over
+   - High score submission and leaderboard display
