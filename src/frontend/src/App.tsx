@@ -5,43 +5,21 @@ import {
   createRoute,
   createRouter,
 } from "@tanstack/react-router";
-import CarRacingGame from "./Game";
-import { DocumentDetailPage } from "./pages/DocumentDetailPage";
-import { HomePage } from "./pages/HomePage";
+import BattleZoneGame from "./Game";
 
 // Root route
 const rootRoute = createRootRoute({
-  component: () => (
-    <>
-      <RouterProvider router={router} />
-    </>
-  ),
+  component: () => <RouterProvider router={router} />,
 });
 
 // Routes
 const indexRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/",
-  component: HomePage,
+  component: BattleZoneGame,
 });
 
-const documentRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: "/document/$documentId",
-  component: function DocumentRouteComponent() {
-    const { documentId } = documentRoute.useParams();
-    return <DocumentDetailPage documentId={documentId} />;
-  },
-});
-
-const gameRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: "/game",
-  component: CarRacingGame,
-});
-
-const routeTree = rootRoute.addChildren([indexRoute, documentRoute, gameRoute]);
-
+const routeTree = rootRoute.addChildren([indexRoute]);
 const router = createRouter({ routeTree });
 
 export default function App() {

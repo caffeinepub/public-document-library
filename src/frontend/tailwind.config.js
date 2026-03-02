@@ -17,7 +17,8 @@ export default {
     extend: {
       fontFamily: {
         display: ["Fraunces", "Georgia", "serif"],
-        sans: ["General Sans", "system-ui", "sans-serif"],
+        sans: ["Sora", "General Sans", "system-ui", "sans-serif"],
+        mono: ["JetBrains Mono", "monospace"],
       },
       colors: {
         border: "oklch(var(--border))",

@@ -1,39 +1,40 @@
-# Car Racing Game
+# BGMI Style Battle Royale Game
 
 ## Current State
-New project. No existing code.
+Project currently has a Car Racing Game. We are replacing it with a new top-down 2D battle royale shooter game.
 
 ## Requested Changes (Diff)
 
 ### Add
-- 2D car racing game using Canvas API
-- Player controls their car using arrow keys or WASD
-- Multiple AI opponent cars on a scrolling road
-- Score/distance tracking as the game progresses
-- Speed increases over time for difficulty progression
-- Lives/health system (3 lives)
-- Game over screen with final score and restart option
-- Leaderboard to save high scores on the backend
-- Start screen with game title and instructions
-- Road with lane markings that scroll downward to simulate movement
-- Player car can move left/right to avoid obstacles and opponents
-- Sound effects via Web Audio API (optional)
+- Top-down 2D battle royale game using Canvas API
+- Player character controlled with WASD / arrow keys
+- Mouse aim and click to shoot
+- Shrinking safe zone (blue zone) mechanic like BGMI
+- Multiple AI enemy bots that patrol and attack player
+- Weapon pickups on map (guns with ammo)
+- Health bar and armor system
+- Kill counter and score display
+- Game over screen with stats (kills, survival time)
+- Leaderboard saving top scores to backend
+- Mobile touch controls (joystick + shoot button)
+- Minimap showing player position and safe zone
 
 ### Modify
-- Nothing (new project)
+- Replace Car Racing Game entirely with new battle royale game
+- Update project name to "Battle Zone"
 
 ### Remove
-- Nothing (new project)
+- All car racing game logic and assets
 
 ## Implementation Plan
-1. Backend: Store high scores with player name and score
-2. Frontend: Canvas-based 2D racing game
-   - Scrolling road with lane markings
-   - Player car (keyboard controlled: arrow keys / WASD)
-   - AI opponent cars coming from top
-   - Collision detection
-   - Score display (distance traveled)
-   - Speed progression
-   - 3 lives system
-   - Game states: start, playing, game over
-   - High score submission and leaderboard display
+1. Backend: Store leaderboard entries (player name, kills, survival time, score)
+2. Frontend: Canvas-based top-down game
+   - Game map with obstacles (walls, trees, rocks)
+   - Player movement (WASD + mouse aim)
+   - Shooting mechanic (bullets, collision detection)
+   - AI enemies with basic pathfinding and attack behavior
+   - Shrinking safe zone that deals damage outside it
+   - Weapon/ammo pickups scattered on map
+   - HUD: health bar, ammo count, kill counter, zone timer, minimap
+   - Game over screen with leaderboard submission
+   - Touch controls for mobile

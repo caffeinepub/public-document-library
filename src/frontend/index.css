@@ -17,67 +17,88 @@
   font-style: normal;
   font-display: swap;
 }
+@font-face {
+  font-family: "Sora";
+  src: url("/assets/fonts/Sora.woff2") format("woff2");
+  font-weight: 100 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/assets/fonts/JetBrainsMono.woff2") format("woff2");
+  font-weight: 100 800;
+  font-style: normal;
+  font-display: swap;
+}
 
 /* ─── Design Tokens ────────────────────────────────────────────── */
 @layer base {
   :root {
     --radius: 0.5rem;
 
-    /* Warm off-white background — paper feel */
-    --background: 0.975 0.006 85;
-    --foreground: 0.18 0.025 255;
+    /* Dark military background */
+    --background: 0.12 0.02 140;
+    --foreground: 0.92 0.05 140;
 
-    /* Cards — slightly brighter cream */
-    --card: 0.99 0.004 80;
-    --card-foreground: 0.18 0.025 255;
+    /* Cards */
+    --card: 0.16 0.025 140;
+    --card-foreground: 0.92 0.05 140;
 
     /* Popover */
-    --popover: 0.995 0.003 80;
-    --popover-foreground: 0.18 0.025 255;
+    --popover: 0.14 0.02 140;
+    --popover-foreground: 0.92 0.05 140;
 
-    /* Primary — deep navy */
-    --primary: 0.22 0.06 258;
-    --primary-foreground: 0.98 0 0;
+    /* Primary — neon green */
+    --primary: 0.75 0.22 145;
+    --primary-foreground: 0.08 0.02 140;
 
-    /* Secondary — soft sand */
-    --secondary: 0.94 0.01 75;
-    --secondary-foreground: 0.25 0.04 255;
+    /* Secondary */
+    --secondary: 0.2 0.03 140;
+    --secondary-foreground: 0.85 0.06 145;
 
     /* Muted */
-    --muted: 0.94 0.008 80;
-    --muted-foreground: 0.52 0.02 255;
+    --muted: 0.18 0.025 140;
+    --muted-foreground: 0.55 0.06 140;
 
-    /* Accent — amber-gold */
-    --accent: 0.78 0.12 65;
-    --accent-foreground: 0.12 0.04 255;
+    /* Accent — orange/danger */
+    --accent: 0.65 0.22 45;
+    --accent-foreground: 0.08 0.02 45;
 
     /* Destructive */
     --destructive: 0.577 0.245 27.325;
     --destructive-foreground: 0.985 0 0;
 
     /* Borders */
-    --border: 0.87 0.01 80;
-    --input: 0.88 0.012 80;
-    --ring: 0.22 0.06 258;
+    --border: 0.25 0.04 140;
+    --input: 0.22 0.035 140;
+    --ring: 0.75 0.22 145;
 
     /* Charts */
-    --chart-1: 0.78 0.12 65;
-    --chart-2: 0.55 0.18 258;
-    --chart-3: 0.65 0.14 165;
-    --chart-4: 0.7 0.16 30;
-    --chart-5: 0.6 0.15 300;
+    --chart-1: 0.75 0.22 145;
+    --chart-2: 0.65 0.22 45;
+    --chart-3: 0.6 0.2 200;
+    --chart-4: 0.7 0.18 300;
+    --chart-5: 0.65 0.15 100;
 
     /* Sidebar */
-    --sidebar: 0.22 0.06 258;
-    --sidebar-foreground: 0.95 0.008 80;
-    --sidebar-primary: 0.78 0.12 65;
-    --sidebar-primary-foreground: 0.12 0.04 255;
-    --sidebar-accent: 0.3 0.07 258;
-    --sidebar-accent-foreground: 0.95 0.008 80;
-    --sidebar-border: 0.32 0.05 258;
-    --sidebar-ring: 0.78 0.12 65;
+    --sidebar: 0.12 0.02 140;
+    --sidebar-foreground: 0.92 0.05 140;
+    --sidebar-primary: 0.75 0.22 145;
+    --sidebar-primary-foreground: 0.08 0.02 140;
+    --sidebar-accent: 0.2 0.03 140;
+    --sidebar-accent-foreground: 0.85 0.06 145;
+    --sidebar-border: 0.25 0.04 140;
+    --sidebar-ring: 0.75 0.22 145;
 
-    /* Custom tokens */
+    /* Custom game tokens */
+    --neon-green: 0.75 0.22 145;
+    --danger-red: 0.55 0.22 27;
+    --zone-blue: 0.6 0.2 240;
+    --military-dark: 0.1 0.018 140;
+    --military-mid: 0.18 0.03 140;
+
+    /* Legacy tokens for compatibility */
     --navy: 0.22 0.06 258;
     --amber: 0.78 0.12 65;
     --cream: 0.975 0.006 85;
@@ -89,13 +110,13 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
-    background-image:
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    @apply bg-background text-foreground antialiased;
+    font-family: "Sora", "General Sans", system-ui, sans-serif;
+    overflow: hidden;
   }
 
   h1, h2, h3, h4 {
-    @apply font-display;
+    font-family: "Fraunces", Georgia, serif;
   }
 }
 
@@ -105,31 +126,35 @@
     text-wrap: balance;
   }
 
-  .doc-card-hover {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-  .doc-card-hover:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px oklch(0.18 0.025 255 / 0.12);
+  .font-mono {
+    font-family: "JetBrains Mono", monospace;
   }
 
-  .upload-zone {
-    background: repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 8px,
-      oklch(0.87 0.01 80 / 0.5) 8px,
-      oklch(0.87 0.01 80 / 0.5) 9px
-    );
+  .neon-glow {
+    text-shadow: 0 0 10px oklch(0.75 0.22 145 / 0.8), 0 0 20px oklch(0.75 0.22 145 / 0.4);
   }
 
-  .upload-zone-active {
-    background: repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 8px,
-      oklch(0.78 0.12 65 / 0.25) 8px,
-      oklch(0.78 0.12 65 / 0.25) 9px
-    );
+  .danger-glow {
+    text-shadow: 0 0 10px oklch(0.55 0.22 27 / 0.8), 0 0 20px oklch(0.55 0.22 27 / 0.4);
+  }
+
+  .game-btn {
+    background: linear-gradient(135deg, oklch(0.65 0.22 145), oklch(0.55 0.18 145));
+    border: 1px solid oklch(0.75 0.22 145 / 0.6);
+    color: oklch(0.1 0.02 140);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    box-shadow: 0 0 20px oklch(0.75 0.22 145 / 0.3);
+  }
+
+  .game-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0 30px oklch(0.75 0.22 145 / 0.5), 0 4px 16px rgba(0,0,0,0.4);
+  }
+
+  .game-btn:active {
+    transform: translateY(0);
   }
 }
