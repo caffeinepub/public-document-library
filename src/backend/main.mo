@@ -1,88 +1,82 @@
+import Runtime "mo:core/Runtime";
+import Order "mo:core/Order";
+import Array "mo:core/Array";
+import Iter "mo:core/Iter";
+import Text "mo:core/Text";
+import Map "mo:core/Map";
+import Time "mo:core/Time";
 import MixinStorage "blob-storage/Mixin";
 import Storage "blob-storage/Storage";
-import Map "mo:core/Map";
-import Text "mo:core/Text";
-import Iter "mo:core/Iter";
-import Time "mo:core/Time";
-import Runtime "mo:core/Runtime";
-import Array "mo:core/Array";
-import Order "mo:core/Order";
+
+
 
 actor {
   include MixinStorage();
 
-  type Document = {
+  type Resolution = {
+    width : Nat;
+    height : Nat;
+  };
+
+  type Photo = {
     id : Text;
     title : Text;
-    description : Text;
-    uploaderName : Text;
-    uploadedAt : Time.Time;
-    blobId : Storage.ExternalBlob;
-    fileType : Text;
-    fileSize : Nat;
+    timestamp : Time.Time;
+    resolution : Resolution;
+    blob : Storage.ExternalBlob;
   };
 
-  module Document {
-    public func compare(doc1 : Document, doc2 : Document) : Order.Order {
-      Text.compare(doc1.title, doc2.title);
-    };
-
-    public func matchesSearch(doc : Document, searchTerm : Text) : Bool {
-      doc.title.toLower().contains(#text(searchTerm.toLower())) or
-      doc.description.toLower().contains(#text(searchTerm.toLower()));
+  module Photo {
+    public func compare(p1 : Photo, p2 : Photo) : Order.Order {
+      Text.compare(p1.title, p2.title);
     };
   };
 
-  let documents = Map.empty<Text, Document>();
+  let photos = Map.empty<Text, Photo>();
 
-  public shared ({ caller }) func uploadDocument(
-    title : Text,
-    description : Text,
-    uploaderName : Text,
-    blob : Storage.ExternalBlob,
-    fileType : Text,
-    fileSize : Nat,
-  ) : async Text {
+  // Save a photo
+  public shared ({ caller }) func savePhoto(title : Text, resolution : Resolution, blob : Storage.ExternalBlob) : async Text {
     let id = title.concat(" - ").concat(Time.now().toText());
-    let document : Document = {
+    let photo : Photo = {
       id;
       title;
-      description;
-      uploaderName;
-      uploadedAt = Time.now();
-      blobId = blob;
-      fileType;
-      fileSize;
+      timestamp = Time.now();
+      resolution;
+      blob;
     };
 
-    documents.add(id, document);
+    photos.add(id, photo);
     id;
   };
 
-  public query ({ caller }) func getAllDocuments() : async [Document] {
-    documents.values().toArray().sort();
+  // List all photos
+  public query ({ caller }) func listPhotos() : async [Photo] {
+    photos.values().toArray().sort();
   };
 
-  public query ({ caller }) func getDocumentById(id : Text) : async Document {
-    switch (documents.get(id)) {
-      case (null) { Runtime.trap("Document not found") };
-      case (?document) { document };
+  // Get a specific photo
+  public query ({ caller }) func getPhoto(id : Text) : async Photo {
+    switch (photos.get(id)) {
+      case (null) { Runtime.trap("Photo not found") };
+      case (?photo) { photo };
     };
   };
 
-  public shared ({ caller }) func deleteDocument(id : Text) : async () {
-    switch (documents.get(id)) {
-      case (null) { Runtime.trap("Document not found") };
+  // Delete a photo
+  public shared ({ caller }) func deletePhoto(id : Text) : async () {
+    switch (photos.get(id)) {
+      case (null) { Runtime.trap("Photo not found") };
       case (?_) {
-        documents.remove(id);
+        photos.remove(id);
       };
     };
   };
 
-  public query ({ caller }) func searchDocuments(searchTerm : Text) : async [Document] {
-    let filtered = documents.values().filter(
-      func(doc) {
-        Document.matchesSearch(doc, searchTerm);
+  // Search photos by title
+  public query ({ caller }) func searchPhotos(searchTerm : Text) : async [Photo] {
+    let filtered = photos.values().filter(
+      func(p) {
+        p.title.toLower().contains(#text(searchTerm.toLower()));
       }
     );
     filtered.toArray();

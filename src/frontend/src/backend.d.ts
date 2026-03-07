@@ -14,21 +14,22 @@ export class ExternalBlob {
     static fromBytes(blob: Uint8Array<ArrayBuffer>): ExternalBlob;
     withUploadProgress(onProgress: (percentage: number) => void): ExternalBlob;
 }
-export interface Document {
+export type Time = bigint;
+export interface Resolution {
+    height: bigint;
+    width: bigint;
+}
+export interface Photo {
     id: string;
     title: string;
-    uploaderName: string;
-    description: string;
-    fileSize: bigint;
-    fileType: string;
-    blobId: ExternalBlob;
-    uploadedAt: Time;
+    blob: ExternalBlob;
+    resolution: Resolution;
+    timestamp: Time;
 }
-export type Time = bigint;
 export interface backendInterface {
-    deleteDocument(id: string): Promise<void>;
-    getAllDocuments(): Promise<Array<Document>>;
-    getDocumentById(id: string): Promise<Document>;
-    searchDocuments(searchTerm: string): Promise<Array<Document>>;
-    uploadDocument(title: string, description: string, uploaderName: string, blob: ExternalBlob, fileType: string, fileSize: bigint): Promise<string>;
+    deletePhoto(id: string): Promise<void>;
+    getPhoto(id: string): Promise<Photo>;
+    listPhotos(): Promise<Array<Photo>>;
+    savePhoto(title: string, resolution: Resolution, blob: ExternalBlob): Promise<string>;
+    searchPhotos(searchTerm: string): Promise<Array<Photo>>;
 }

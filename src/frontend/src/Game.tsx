@@ -985,6 +985,11 @@ const BattleZoneGame: React.FC = () => {
     rank: number;
   } | null>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [showInstallBanner, setShowInstallBanner] = useState(false);
+  const deferredPromptRef = useRef<
+    | (Event & { prompt: () => void; userChoice: Promise<{ outcome: string }> })
+    | null
+  >(null);
 
   useEffect(() => {
     const check = () =>
@@ -993,6 +998,46 @@ const BattleZoneGame: React.FC = () => {
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
   }, []);
+
+  // PWA install prompt
+  useEffect(() => {
+    const handler = (e: Event) => {
+      e.preventDefault();
+      deferredPromptRef.current = e as Event & {
+        prompt: () => void;
+        userChoice: Promise<{ outcome: string }>;
+      };
+      setShowInstallBanner(true);
+    };
+    window.addEventListener("beforeinstallprompt", handler);
+
+    // Also show banner on iOS (which doesn't support beforeinstallprompt)
+    const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+    const isStandalone = window.matchMedia(
+      "(display-mode: standalone)",
+    ).matches;
+    if (isIOS && !isStandalone) {
+      setShowInstallBanner(true);
+    }
+
+    return () => window.removeEventListener("beforeinstallprompt", handler);
+  }, []);
+
+  const handleInstall = async () => {
+    if (deferredPromptRef.current) {
+      deferredPromptRef.current.prompt();
+      const { outcome } = await deferredPromptRef.current.userChoice;
+      if (outcome === "accepted") {
+        setShowInstallBanner(false);
+      }
+      deferredPromptRef.current = null;
+    } else {
+      // iOS fallback - show instructions
+      alert(
+        "iPhone par:\n1. Safari mein neeche Share button dabao\n2. 'Add to Home Screen' select karo\n\nAndroid par:\n1. Chrome menu (3 dots) kholo\n2. 'Add to Home screen' select karo",
+      );
+    }
+  };
 
   // ─── Spawn enemies ────────────────────────────────────────────────
   const spawnEnemies = useCallback(() => {
@@ -2601,6 +2646,75 @@ const BattleZoneGame: React.FC = () => {
           </div>
         )}
       </div>
+
+      {/* Add to Home Screen Banner */}
+      {showInstallBanner && (
+        <div
+          style={{
+            marginTop: 8,
+            display: "flex",
+            alignItems: "center",
+            gap: 10,
+            background: "rgba(0,40,0,0.85)",
+            border: "1px solid rgba(136,255,68,0.35)",
+            borderRadius: 10,
+            padding: "8px 14px",
+            zIndex: 10,
+            maxWidth: 380,
+            width: "100%",
+            boxShadow: "0 0 16px rgba(100,200,50,0.15)",
+          }}
+        >
+          <span style={{ fontSize: "1.2rem" }}>📲</span>
+          <div style={{ flex: 1 }}>
+            <div
+              style={{
+                color: "#88ff44",
+                fontSize: "0.72rem",
+                fontWeight: 700,
+                letterSpacing: "0.06em",
+              }}
+            >
+              Home Screen par Add karo
+            </div>
+            <div style={{ color: "rgba(150,220,80,0.6)", fontSize: "0.6rem" }}>
+              Game seedha phone se kholo -- bilkul app ki tarah
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={handleInstall}
+            style={{
+              padding: "6px 14px",
+              background: "linear-gradient(135deg, #558822, #336611)",
+              border: "1px solid rgba(136,255,68,0.5)",
+              borderRadius: 20,
+              color: "#ccff88",
+              fontSize: "0.72rem",
+              fontWeight: 700,
+              cursor: "pointer",
+              whiteSpace: "nowrap",
+            }}
+          >
+            Install
+          </button>
+          <button
+            type="button"
+            onClick={() => setShowInstallBanner(false)}
+            style={{
+              background: "none",
+              border: "none",
+              color: "rgba(150,200,80,0.4)",
+              fontSize: "1rem",
+              cursor: "pointer",
+              padding: "0 2px",
+              lineHeight: 1,
+            }}
+          >
+            ✕
+          </button>
+        </div>
+      )}
 
       {/* Footer */}
       <p

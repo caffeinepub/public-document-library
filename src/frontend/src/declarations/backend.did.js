@@ -20,16 +20,14 @@ export const _CaffeineStorageRefillResult = IDL.Record({
   'topped_up_amount' : IDL.Opt(IDL.Nat),
 });
 export const ExternalBlob = IDL.Vec(IDL.Nat8);
+export const Resolution = IDL.Record({ 'height' : IDL.Nat, 'width' : IDL.Nat });
 export const Time = IDL.Int;
-export const Document = IDL.Record({
+export const Photo = IDL.Record({
   'id' : IDL.Text,
   'title' : IDL.Text,
-  'uploaderName' : IDL.Text,
-  'description' : IDL.Text,
-  'fileSize' : IDL.Nat,
-  'fileType' : IDL.Text,
-  'blobId' : ExternalBlob,
-  'uploadedAt' : Time,
+  'blob' : ExternalBlob,
+  'resolution' : Resolution,
+  'timestamp' : Time,
 });
 
 export const idlService = IDL.Service({
@@ -59,15 +57,11 @@ export const idlService = IDL.Service({
       [],
     ),
   '_caffeineStorageUpdateGatewayPrincipals' : IDL.Func([], [], []),
-  'deleteDocument' : IDL.Func([IDL.Text], [], []),
-  'getAllDocuments' : IDL.Func([], [IDL.Vec(Document)], ['query']),
-  'getDocumentById' : IDL.Func([IDL.Text], [Document], ['query']),
-  'searchDocuments' : IDL.Func([IDL.Text], [IDL.Vec(Document)], ['query']),
-  'uploadDocument' : IDL.Func(
-      [IDL.Text, IDL.Text, IDL.Text, ExternalBlob, IDL.Text, IDL.Nat],
-      [IDL.Text],
-      [],
-    ),
+  'deletePhoto' : IDL.Func([IDL.Text], [], []),
+  'getPhoto' : IDL.Func([IDL.Text], [Photo], ['query']),
+  'listPhotos' : IDL.Func([], [IDL.Vec(Photo)], ['query']),
+  'savePhoto' : IDL.Func([IDL.Text, Resolution, ExternalBlob], [IDL.Text], []),
+  'searchPhotos' : IDL.Func([IDL.Text], [IDL.Vec(Photo)], ['query']),
 });
 
 export const idlInitArgs = [];
@@ -85,16 +79,14 @@ export const idlFactory = ({ IDL }) => {
     'topped_up_amount' : IDL.Opt(IDL.Nat),
   });
   const ExternalBlob = IDL.Vec(IDL.Nat8);
+  const Resolution = IDL.Record({ 'height' : IDL.Nat, 'width' : IDL.Nat });
   const Time = IDL.Int;
-  const Document = IDL.Record({
+  const Photo = IDL.Record({
     'id' : IDL.Text,
     'title' : IDL.Text,
-    'uploaderName' : IDL.Text,
-    'description' : IDL.Text,
-    'fileSize' : IDL.Nat,
-    'fileType' : IDL.Text,
-    'blobId' : ExternalBlob,
-    'uploadedAt' : Time,
+    'blob' : ExternalBlob,
+    'resolution' : Resolution,
+    'timestamp' : Time,
   });
   
   return IDL.Service({
@@ -124,15 +116,15 @@ export const idlFactory = ({ IDL }) => {
         [],
       ),
     '_caffeineStorageUpdateGatewayPrincipals' : IDL.Func([], [], []),
-    'deleteDocument' : IDL.Func([IDL.Text], [], []),
-    'getAllDocuments' : IDL.Func([], [IDL.Vec(Document)], ['query']),
-    'getDocumentById' : IDL.Func([IDL.Text], [Document], ['query']),
-    'searchDocuments' : IDL.Func([IDL.Text], [IDL.Vec(Document)], ['query']),
-    'uploadDocument' : IDL.Func(
-        [IDL.Text, IDL.Text, IDL.Text, ExternalBlob, IDL.Text, IDL.Nat],
+    'deletePhoto' : IDL.Func([IDL.Text], [], []),
+    'getPhoto' : IDL.Func([IDL.Text], [Photo], ['query']),
+    'listPhotos' : IDL.Func([], [IDL.Vec(Photo)], ['query']),
+    'savePhoto' : IDL.Func(
+        [IDL.Text, Resolution, ExternalBlob],
         [IDL.Text],
         [],
       ),
+    'searchPhotos' : IDL.Func([IDL.Text], [IDL.Vec(Photo)], ['query']),
   });
 };
 

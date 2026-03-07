@@ -1,22 +1,23 @@
 import { Toaster } from "@/components/ui/sonner";
 import {
+  Outlet,
   RouterProvider,
   createRootRoute,
   createRoute,
   createRouter,
 } from "@tanstack/react-router";
-import BattleZoneGame from "./Game";
+import ProCam from "./pages/ProCam";
 
 // Root route
 const rootRoute = createRootRoute({
-  component: () => <RouterProvider router={router} />,
+  component: () => <Outlet />,
 });
 
 // Routes
 const indexRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/",
-  component: BattleZoneGame,
+  component: ProCam,
 });
 
 const routeTree = rootRoute.addChildren([indexRoute]);
@@ -26,7 +27,7 @@ export default function App() {
   return (
     <>
       <RouterProvider router={router} />
-      <Toaster richColors position="top-right" />
+      <Toaster richColors position="top-center" />
     </>
   );
 }

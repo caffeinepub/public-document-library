@@ -4,23 +4,16 @@
 
 /* ─── Font Faces ───────────────────────────────────────────────── */
 @font-face {
-  font-family: "Fraunces";
-  src: url("/assets/fonts/Fraunces.woff2") format("woff2");
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "General Sans";
-  src: url("/assets/fonts/GeneralSans.woff2") format("woff2");
-  font-weight: 200 700;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
   font-family: "Sora";
   src: url("/assets/fonts/Sora.woff2") format("woff2");
   font-weight: 100 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Outfit";
+  src: url("/assets/fonts/Outfit.woff2") format("woff2");
+  font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
@@ -32,73 +25,73 @@
   font-display: swap;
 }
 
-/* ─── Design Tokens ────────────────────────────────────────────── */
+/* ─── Design Tokens — ProCam Dark Cinematic ───────────────────── */
 @layer base {
   :root {
-    --radius: 0.5rem;
+    --radius: 0.625rem;
 
-    /* Dark military background */
-    --background: 0.12 0.02 140;
-    --foreground: 0.92 0.05 140;
+    /* Near-black camera UI */
+    --background: 0.06 0.005 240;
+    --foreground: 0.95 0.01 240;
 
-    /* Cards */
-    --card: 0.16 0.025 140;
-    --card-foreground: 0.92 0.05 140;
+    /* Cards — dark glass panels */
+    --card: 0.1 0.008 240;
+    --card-foreground: 0.95 0.01 240;
 
     /* Popover */
-    --popover: 0.14 0.02 140;
-    --popover-foreground: 0.92 0.05 140;
+    --popover: 0.09 0.008 240;
+    --popover-foreground: 0.95 0.01 240;
 
-    /* Primary — neon green */
-    --primary: 0.75 0.22 145;
-    --primary-foreground: 0.08 0.02 140;
+    /* Primary — amber/orange camera accent */
+    --primary: 0.78 0.17 65;
+    --primary-foreground: 0.06 0.005 240;
 
-    /* Secondary */
-    --secondary: 0.2 0.03 140;
-    --secondary-foreground: 0.85 0.06 145;
+    /* Secondary — dim dark panel */
+    --secondary: 0.14 0.01 240;
+    --secondary-foreground: 0.75 0.02 240;
 
     /* Muted */
-    --muted: 0.18 0.025 140;
-    --muted-foreground: 0.55 0.06 140;
+    --muted: 0.12 0.008 240;
+    --muted-foreground: 0.5 0.02 240;
 
-    /* Accent — orange/danger */
-    --accent: 0.65 0.22 45;
-    --accent-foreground: 0.08 0.02 45;
+    /* Accent — warm amber glow */
+    --accent: 0.75 0.18 65;
+    --accent-foreground: 0.06 0.005 240;
 
     /* Destructive */
-    --destructive: 0.577 0.245 27.325;
+    --destructive: 0.55 0.22 25;
     --destructive-foreground: 0.985 0 0;
 
     /* Borders */
-    --border: 0.25 0.04 140;
-    --input: 0.22 0.035 140;
-    --ring: 0.75 0.22 145;
+    --border: 0.2 0.012 240;
+    --input: 0.18 0.01 240;
+    --ring: 0.78 0.17 65;
 
     /* Charts */
-    --chart-1: 0.75 0.22 145;
-    --chart-2: 0.65 0.22 45;
-    --chart-3: 0.6 0.2 200;
-    --chart-4: 0.7 0.18 300;
-    --chart-5: 0.65 0.15 100;
+    --chart-1: 0.78 0.17 65;
+    --chart-2: 0.65 0.15 145;
+    --chart-3: 0.6 0.18 200;
+    --chart-4: 0.7 0.16 300;
+    --chart-5: 0.65 0.14 30;
 
     /* Sidebar */
-    --sidebar: 0.12 0.02 140;
-    --sidebar-foreground: 0.92 0.05 140;
-    --sidebar-primary: 0.75 0.22 145;
-    --sidebar-primary-foreground: 0.08 0.02 140;
-    --sidebar-accent: 0.2 0.03 140;
-    --sidebar-accent-foreground: 0.85 0.06 145;
-    --sidebar-border: 0.25 0.04 140;
-    --sidebar-ring: 0.75 0.22 145;
+    --sidebar: 0.08 0.006 240;
+    --sidebar-foreground: 0.92 0.012 240;
+    --sidebar-primary: 0.78 0.17 65;
+    --sidebar-primary-foreground: 0.06 0.005 240;
+    --sidebar-accent: 0.14 0.01 240;
+    --sidebar-accent-foreground: 0.75 0.02 240;
+    --sidebar-border: 0.18 0.01 240;
+    --sidebar-ring: 0.78 0.17 65;
 
-    /* Custom game tokens */
-    --neon-green: 0.75 0.22 145;
-    --danger-red: 0.55 0.22 27;
-    --zone-blue: 0.6 0.2 240;
-    --military-dark: 0.1 0.018 140;
-    --military-mid: 0.18 0.03 140;
+    /* Custom camera tokens */
+    --cam-amber: 0.78 0.17 65;
+    --cam-amber-glow: 0.78 0.17 65;
+    --cam-dark: 0.05 0.004 240;
+    --cam-panel: 0.1 0.008 240;
+    --cam-glass: 0.14 0.01 240;
 
-    /* Legacy tokens for compatibility */
+    /* Legacy tokens */
     --navy: 0.22 0.06 258;
     --amber: 0.78 0.12 65;
     --cream: 0.975 0.006 85;
@@ -111,16 +104,16 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: "Sora", "General Sans", system-ui, sans-serif;
+    font-family: "Sora", "Outfit", system-ui, sans-serif;
     overflow: hidden;
   }
 
-  h1, h2, h3, h4 {
-    font-family: "Fraunces", Georgia, serif;
+  html {
+    color-scheme: dark;
   }
 }
 
-/* ─── Custom Utilities ─────────────────────────────────────────── */
+/* ─── Camera Custom Utilities ──────────────────────────────────── */
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -130,31 +123,84 @@
     font-family: "JetBrains Mono", monospace;
   }
 
-  .neon-glow {
-    text-shadow: 0 0 10px oklch(0.75 0.22 145 / 0.8), 0 0 20px oklch(0.75 0.22 145 / 0.4);
+  /* Frosted glass panels */
+  .cam-glass {
+    background: oklch(0.08 0.006 240 / 0.75);
+    backdrop-filter: blur(16px) saturate(1.4);
+    -webkit-backdrop-filter: blur(16px) saturate(1.4);
+    border: 1px solid oklch(0.25 0.015 240 / 0.4);
   }
 
-  .danger-glow {
-    text-shadow: 0 0 10px oklch(0.55 0.22 27 / 0.8), 0 0 20px oklch(0.55 0.22 27 / 0.4);
+  .cam-glass-light {
+    background: oklch(0.12 0.008 240 / 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid oklch(0.3 0.015 240 / 0.3);
   }
 
-  .game-btn {
-    background: linear-gradient(135deg, oklch(0.65 0.22 145), oklch(0.55 0.18 145));
-    border: 1px solid oklch(0.75 0.22 145 / 0.6);
-    color: oklch(0.1 0.02 140);
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    cursor: pointer;
+  /* Amber glow */
+  .amber-glow {
+    box-shadow: 0 0 16px oklch(0.78 0.17 65 / 0.5), 0 0 32px oklch(0.78 0.17 65 / 0.2);
+  }
+
+  .amber-text-glow {
+    text-shadow: 0 0 8px oklch(0.78 0.17 65 / 0.7);
+  }
+
+  /* Shutter button */
+  .shutter-btn {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    border: 3px solid oklch(0.9 0.01 240);
+    background: oklch(0.14 0.01 240);
+    box-shadow: 0 0 0 2px oklch(0.4 0.02 240 / 0.5), inset 0 1px 3px oklch(0 0 0 / 0.5);
     transition: all 0.15s ease;
-    box-shadow: 0 0 20px oklch(0.75 0.22 145 / 0.3);
+    cursor: pointer;
+    position: relative;
   }
 
-  .game-btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 0 30px oklch(0.75 0.22 145 / 0.5), 0 4px 16px rgba(0,0,0,0.4);
+  .shutter-btn:active,
+  .shutter-btn.capturing {
+    border-color: oklch(0.78 0.17 65);
+    box-shadow: 0 0 0 3px oklch(0.78 0.17 65 / 0.4), 0 0 24px oklch(0.78 0.17 65 / 0.5);
+    transform: scale(0.95);
   }
 
-  .game-btn:active {
-    transform: translateY(0);
+  /* Focus square animation */
+  @keyframes focus-square {
+    0% { opacity: 1; transform: scale(1.4); }
+    50% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1); }
+  }
+
+  .focus-square {
+    animation: focus-square 0.8s ease-out forwards;
+  }
+
+  /* Countdown overlay */
+  @keyframes countdown-pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+  }
+
+  .countdown-text {
+    animation: countdown-pulse 0.9s ease-in-out infinite;
+  }
+
+  /* Flash effect */
+  @keyframes flash-white {
+    0% { opacity: 0; }
+    30% { opacity: 0.9; }
+    100% { opacity: 0; }
+  }
+
+  .flash-overlay {
+    animation: flash-white 0.35s ease-out forwards;
+  }
+
+  /* Level indicator */
+  .level-bubble {
+    transition: transform 0.1s ease-out;
   }
 }

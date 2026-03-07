@@ -1,4 +1,3 @@
-// Camera app queries - photo storage via backend
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { ExternalBlob } from "../backend";
 import { useActor } from "./useActor";

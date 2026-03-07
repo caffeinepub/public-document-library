@@ -10,17 +10,15 @@ import type { ActorMethod } from '@icp-sdk/core/agent';
 import type { IDL } from '@icp-sdk/core/candid';
 import type { Principal } from '@icp-sdk/core/principal';
 
-export interface Document {
+export type ExternalBlob = Uint8Array;
+export interface Photo {
   'id' : string,
   'title' : string,
-  'uploaderName' : string,
-  'description' : string,
-  'fileSize' : bigint,
-  'fileType' : string,
-  'blobId' : ExternalBlob,
-  'uploadedAt' : Time,
+  'blob' : ExternalBlob,
+  'resolution' : Resolution,
+  'timestamp' : Time,
 }
-export type ExternalBlob = Uint8Array;
+export interface Resolution { 'height' : bigint, 'width' : bigint }
 export type Time = bigint;
 export interface _CaffeineStorageCreateCertificateResult {
   'method' : string,
@@ -49,14 +47,11 @@ export interface _SERVICE {
     _CaffeineStorageRefillResult
   >,
   '_caffeineStorageUpdateGatewayPrincipals' : ActorMethod<[], undefined>,
-  'deleteDocument' : ActorMethod<[string], undefined>,
-  'getAllDocuments' : ActorMethod<[], Array<Document>>,
-  'getDocumentById' : ActorMethod<[string], Document>,
-  'searchDocuments' : ActorMethod<[string], Array<Document>>,
-  'uploadDocument' : ActorMethod<
-    [string, string, string, ExternalBlob, string, bigint],
-    string
-  >,
+  'deletePhoto' : ActorMethod<[string], undefined>,
+  'getPhoto' : ActorMethod<[string], Photo>,
+  'listPhotos' : ActorMethod<[], Array<Photo>>,
+  'savePhoto' : ActorMethod<[string, Resolution, ExternalBlob], string>,
+  'searchPhotos' : ActorMethod<[string], Array<Photo>>,
 }
 export declare const idlService: IDL.ServiceClass;
 export declare const idlInitArgs: IDL.Type[];
